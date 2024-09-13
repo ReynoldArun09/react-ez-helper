@@ -32,3 +32,39 @@ export function detectProjectType() {
 
   return { isNextJs, isTypescript, nextJsStructure };
 }
+
+
+function generate(type, names, options) {
+    console.log('type:'+ type)
+    console.log('names:'+ names)
+    console.log('options:'+ options)
+}
+
+
+function main() {
+  const [, , type, ...args] = process.argv;
+  const options = {
+    css: args.includes("--css"),
+    scss: args.includes("--scss"),
+  };
+  const names = args.filter((arg) => !arg.startsWith("--"));
+
+  console.log(names)
+
+  if (!type || !names.length === 0) {
+    console.error(
+      "Usage: npx generate <type> <name1> [name2] [name3] ... [options]"
+    );
+    console.error("Types: component(s) (c), hook(s) (h), page(s) (p)");
+    console.error("Options: --css, --scss");
+    console.error(
+      "Example: npx generate components Header About Services --scss"
+    );
+    process.exit(1);
+  }
+
+  generate(type, names, options)
+}
+
+
+main()
