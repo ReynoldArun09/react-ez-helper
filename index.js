@@ -34,7 +34,7 @@ export function detectProjectType() {
   return { isNextJs, isTypescript, nextJsStructure };
 }
 
-const { isNextJs, isTypescript, nextJsStructure } = detectProjectType();
+export const { isNextJs, isTypescript, nextJsStructure } = detectProjectType();
 
 const componentsDir = path.join(rootDir, "src", "components");
 const pagesDir = isNextJs

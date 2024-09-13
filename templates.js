@@ -1,56 +1,40 @@
-import { detectProjectType } from "./index.js";
-
-const {isTypeScript, isNextJs} = detectProjectType
+import { isNextJs, isTypescript, nextJsStructure } from "./index.js";
 
 export const templates = {
-    component: (name, cssImport) => `${cssImport ? cssImport : ""}
-  
-  ${isTypeScript ? `interface ${name}Props {}\n\n` : ""}function ${name}(${
-      isTypeScript ? `props: ${name}Props` : ""
-    }) {
+  component: (name, cssImport) => `${cssImport ? cssImport : ""}
+${isTypescript ? `interface ${name}Props {}\n\n` : ""}
+export default function ${name}(${isTypescript ? `props: ${name}Props` : ""}) {
     return (
-      <section>
-        <h1>${name} Component</h1>
-      </section>
+        <section>
+            <h1>${name} Component</h1>
+        </section>
     );
-  }
+}`,
+  hook: (name) => `import { useState } from 'react';
   
-  export default ${name};
-  `,
-    hook: (name) => `import { useState } from 'react';
-  
-  ${isTypeScript ? `interface ${name}Props {}\n\n` : ""}function use${name}() {
+${isTypescript ? `interface ${name}Props {}\n\n` : ""}const use${name} = () => {
     const [state, setState] = useState${
-      isTypeScript ? `<${name}Props>` : ""
+      isTypescript ? `<${name}Props>` : ""
     }(null);
   
     // Add your hook logic here
   
     return { state, setState };
-  }
+}
   
-  export default use${name};
+export default use${name};
   `,
-    page: (name, cssImport) => `${cssImport ? cssImport : ""}
-  
-  ${isTypeScript ? `interface ${name}Props {}\n\n` : ""}${
-      isNextJs && nextJsStructure !== "app"
-        ? `const ${name} = (${isTypeScript ? `props: ${name}Props` : ""}) => {`
-        : isNextJs && nextJsStructure === "app"
-        ? `export default function ${name}(${
-            isTypeScript ? `props: ${name}Props` : ""
-          }) {`
-        : `function ${name}(${isTypeScript ? `props: ${name}Props` : ""}) {`
-    }
+  page: (name, cssImport) => `${cssImport ? cssImport : ""}
+${isTypescript ? `interface ${name}Props {}\n\n` : ""}
+export default function ${name}(${
+    isTypescript ? `props: ${name}Props` : ""
+}) {
     return (
-      <section>
-        <h1>${name} Page</h1>
-      </section>
+        <section>
+              <h1>${name} Component</h1>
+        </section>
     );
-  }
-  
-  ${isNextJs && nextJsStructure === "app" ? "" : `\nexport default ${name};`}
-  `,
-    css: () => `/* Add your styles here */`,
-    scss: () => `/* Add your styles here */`,
-  };
+}`,
+  css: () => `/* Add your styles here */`,
+  scss: () => `/* Add your styles here */`,
+};

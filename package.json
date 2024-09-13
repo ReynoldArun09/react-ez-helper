@@ -5,14 +5,12 @@
   "main": "index.js",
   "type": "module",
   "bin": {
-    "generate": "./index.js"
+    "rn": "./index.js",
+    "react-next": "./index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "reynold",
-  "license": "ISC",
-  "dependencies": {
-    "next": "test"
-  }
+  "license": "ISC"
 }
