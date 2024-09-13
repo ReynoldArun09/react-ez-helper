@@ -3,9 +3,16 @@
   "version": "1.0.0",
   "description": "generate components pages hook with simple commands",
   "main": "index.js",
+  "type": "module",
+  "bin": {
+    "generate": "./index.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "reynold",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "next": "test"
+  }
 }
